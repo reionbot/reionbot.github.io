@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reion Bot - Sewa Bot WhatsApp Bertenaga AI</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Animate On Scroll Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Chart.js for Live Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0B1120; color: #E0E0E0; }
+        .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; }
+        .hero-glow { box-shadow: 0 0 80px 20px rgba(56, 189, 248, 0.2); }
+        .btn-primary { background-color: #0EA5E9; color: white; transition: background-color 0.3s ease, transform 0.3s ease; }
+        .btn-primary:hover { background-color: #0284C7; transform: translateY(-2px); }
+        .btn-primary:disabled { background-color: #384252; cursor: not-allowed; transform: none; }
+        .btn-secondary { background-color: transparent; border: 1px solid #0EA5E9; color: #0EA5E9; transition: background-color 0.3s ease, color 0.3s ease; }
+        .btn-secondary:hover { background-color: #0EA5E9; color: white; }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
+        .floating-anim { animation: float 6s ease-in-out infinite; }
+        .modal-overlay, .faq-chat-modal { transition: opacity 0.3s ease; }
+        .modal-content, .faq-chat-container { transition: transform 0.3s ease, opacity 0.3s ease; }
+        .body-no-scroll { overflow: hidden; }
+        .input-error { border-color: #F87171 !important; animation: shake 0.5s; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+        .faq-chat-bubble-user { background-color: #0EA5E9; color: white; align-self: flex-end; }
+        .faq-chat-bubble-bot { background-color: #1E293B; color: #E0E0E0; align-self: flex-start; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#" class="text-2xl font-bold text-white">Reion<span class="text-sky-400">Bot</span></a>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#fitur" class="text-gray-300 hover:text-sky-400 transition-colors">Fitur</a>
+                    <a href="#harga" class="text-gray-300 hover:text-sky-400 transition-colors">Harga</a>
+                    <a href="#testimoni" class="text-gray-300 hover:text-sky-400 transition-colors">Testimoni</a>
+                </nav>
+                <a href="#harga" class="hidden md:block btn-primary px-5 py-2 rounded-lg font-semibold">Sewa Sekarang</a>
+                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-slate-900 z-40 pt-20">
+        <nav class="flex flex-col items-center space-y-6 text-lg">
+            <a href="#fitur" class="text-gray-300 hover:text-sky-400 transition-colors mobile-link">Fitur</a>
+            <a href="#harga" class="text-gray-300 hover:text-sky-400 transition-colors mobile-link">Harga</a>
+            <a href="#testimoni" class="text-gray-300 hover:text-sky-400 transition-colors mobile-link">Testimoni</a>
+            <a href="#harga" class="btn-primary px-6 py-3 rounded-lg font-semibold mt-4 mobile-link">Sewa Sekarang</a>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center pt-32 pb-16" style="background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);">
+        <div class="container mx-auto px-6 text-center">
+            <div class="max-w-4xl mx-auto">
+                <div data-aos="fade-down">
+                    <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4">
+                        Otomatiskan Interaksi WhatsApp Anda dengan <span class="text-sky-400">Reion Bot</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8">
+                        Solusi bot WhatsApp bulanan yang andal, cepat, dan kini lebih cerdas dengan teknologi AI.
+                    </p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#harga" class="btn-primary px-8 py-3 rounded-lg font-bold text-lg">Mulai Sekarang</a>
+                        <a href="#fitur" class="btn-secondary px-8 py-3 rounded-lg font-bold text-lg">Lihat Fitur</a>
+                    </div>
+                </div>
+                <!-- Live Stats Dashboard -->
+                <div class="mt-16 floating-anim" data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative w-full max-w-3xl mx-auto p-6 rounded-2xl hero-glow glass-card overflow-hidden">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                            <div class="text-center md:text-left">
+                                <p class="text-lg text-gray-400 mb-2">Total Pesan Terproses</p>
+                                <div id="stats-counter" class="text-5xl md:text-6xl font-extrabold text-white tracking-tighter">
+                                    1,324,567
+                                </div>
+                                <div class="flex items-center text-green-400 mt-3 justify-center md:justify-start">
+                                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                    <span class="font-semibold text-sm">Sistem Aktif</span>
+                                </div>
+                            </div>
+                            <div class="h-40">
+                                <canvas id="live-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fitur Section -->
+    <section id="fitur" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">Fitur Unggulan <span class="text-sky-400">Reion Bot</span></h2>
+                 <p class="text-gray-400 mt-2">Semua yang Anda butuhkan untuk automasi WhatsApp.</p>
+            </div>
+             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                 <div class="glass-card p-8 text-center" data-aos="fade-up" data-aos-delay="100"><div class="flex justify-center items-center mb-4 w-16 h-16 mx-auto bg-sky-900/50 rounded-full"><svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg></div><h3 class="text-xl font-bold text-white mb-2">Balasan Otomatis</h3><p class="text-gray-400">Respon cepat 24/7 untuk setiap pesan masuk.</p></div>
+                 <div class="glass-card p-8 text-center" data-aos="fade-up" data-aos-delay="200"><div class="flex justify-center items-center mb-4 w-16 h-16 mx-auto bg-sky-900/50 rounded-full"><svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div><h3 class="text-xl font-bold text-white mb-2">Manajemen Grup</h3><p class="text-gray-400">Kelola grup dengan mudah, dari kick/add member hingga anti-link.</p></div>
+                 <div class="glass-card p-8 text-center" data-aos="fade-up" data-aos-delay="300"><div class="flex justify-center items-center mb-4 w-16 h-16 mx-auto bg-sky-900/50 rounded-full"><svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></div><h3 class="text-xl font-bold text-white mb-2">Pesan Terjadwal</h3><p class="text-gray-400">Kirim pesan otomatis pada waktu yang ditentukan.</p></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section id="harga" class="py-20 bg-slate-900/50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up"><h2 class="text-3xl md:text-4xl font-bold text-white">Paket Harga yang Fleksibel</h2><p class="text-gray-400 mt-2">Pilih paket yang paling sesuai dengan kebutuhan Anda.</p></div>
+            <div class="flex flex-wrap items-center justify-center gap-8">
+                <div class="w-full max-w-sm" data-aos="fade-up" data-aos-delay="100"><div class="glass-card p-8 h-full flex flex-col" data-package-name="Personal" data-package-price="25000"><h3 class="text-2xl font-bold text-white text-center">Personal</h3><p class="text-center text-gray-400 mt-2">Untuk penggunaan pribadi</p><div class="text-center my-6"><span class="text-4xl font-extrabold text-white">Rp 25k</span><span class="text-gray-400">/bulan</span></div><ul class="space-y-4 text-gray-300 flex-grow"><li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Fitur Dasar Bot</li><li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>1 Nomor WhatsApp</li><li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Dukungan Komunitas</li></ul><button class="checkout-button btn-secondary w-full text-center mt-8 px-6 py-3 rounded-lg font-semibold">Pilih Paket</button></div></div>
+                <div class="w-full max-w-sm" data-aos="fade-up" data-aos-delay="200"><div class="glass-card p-8 h-full flex flex-col border-2 border-sky-500 relative" data-package-name="Bisnis" data-package-price="50000"><div class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2"><span class="bg-sky-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Populer</span></div><h3 class="text-2xl font-bold text-white text-center">Bisnis</h3><p class="text-center text-gray-400 mt-2">Untuk UMKM & Bisnis</p><div class="text-center my-6"><span class="text-5xl font-extrabold text-sky-400">Rp 50k</span><span class="text-gray-400">/bulan</span></div><ul class="space-y-4 text-gray-300 flex-grow"><li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Semua Fitur Personal</li><li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Fitur Manajemen Grup</li><li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Integrasi API</li><li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Dukungan Prioritas</li></ul><button class="checkout-button btn-primary w-full text-center mt-8 px-6 py-3 rounded-lg font-semibold">Pilih Paket</button></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimoni" class="py-20">
+        <div class="container mx-auto px-6">
+             <div class="text-center mb-16" data-aos="fade-up"><h2 class="text-3xl md:text-4xl font-bold text-white">Lihat Kata Pengguna Lain 💬</h2><p class="text-gray-400 mt-2">Dapatkan testimoni yang relevan dengan bidang Anda.</p></div>
+            <div class="max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex flex-col sm:flex-row gap-4"><input type="text" id="testimonial-input" class="w-full bg-slate-800 border border-slate-700 text-white rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Masukkan bidang usaha Anda (cth: Kuliner)"><button id="testimonial-button" class="btn-primary px-6 py-4 rounded-lg font-bold w-full sm:w-auto flex-shrink-0">Cari Testimoni</button></div>
+                <div id="testimonial-loader" class="hidden justify-center mt-8"><div class="loader"></div></div>
+                <div id="testimonial-result" class="mt-8"><div class="glass-card p-8"><p class="text-gray-300 mb-4">"Reion Bot sangat membantu toko online saya. Balasan otomatisnya membuat pelanggan tidak perlu menunggu lama. Recommended!"</p><div class="flex items-center"><img src="https://i.pravatar.cc/40?u=a042581f4e29026704d" alt="Client 1" class="w-10 h-10 rounded-full mr-4"><div><p class="font-bold text-white">Andi Saputra</p><p class="text-sm text-gray-400">Pemilik Olshop</p></div></div></div></div>
+                 <p id="testimonial-error" class="hidden text-center text-red-400 mt-4">Maaf, terjadi kesalahan. Silakan coba lagi.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-slate-900/50 border-t border-slate-800 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8 text-center md:text-left">
+                <div><a href="#" class="text-2xl font-bold text-white">Reion<span class="text-sky-400">Bot</span></a><p class="text-gray-500 mt-2">Automasi WhatsApp cerdas untuk memajukan bisnis dan kegiatan Anda.</p></div>
+                 <div></div>
+                <div class="md:text-right"><p class="font-bold text-white mb-4">Ikuti Kami</p><div class="flex justify-center md:justify-end space-x-4">
+                    <a href="https://wa.me/6285876125581" target="_blank" class="text-gray-400 hover:text-sky-400 transition-colors" title="WhatsApp">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.487 5.235 3.487 8.413.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.447-4.435-9.884-9.889-9.884-5.448 0-9.886 4.434-9.889 9.884.001 2.225.651 4.288 1.902 6.015l.115.178-1.362 4.955 5.064-1.325.166.098z" /></svg>
+                    </a>
+                    <a href="https://instagram.com/faa.htmll" target="_blank" class="text-gray-400 hover:text-sky-400 transition-colors" title="Instagram"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 012.153 2.153c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-2.153 2.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-2.153-2.153c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 012.153-2.153c.636-.247 1.363.416 2.427.465C9.53 2.013 9.884 2 12.315 2zm-1.002 6.363a1.002 1.002 0 11-2.004 0 1.002 1.002 0 012.004 0zm1.748-1.562a.498.498 0 100-.996.498.498 0 000 .996zM12 9.75a4.25 4.25 0 100 8.5 4.25 4.25 0 000-8.5zm-2.25 4.25a2.25 2.25 0 114.5 0 2.25 2.25 0 01-4.5 0z" clip-rule="evenodd" /></svg></a>
+                    <a href="https://tiktok.com/@faaamlbb_" target="_blank" class="text-gray-400 hover:text-sky-400 transition-colors" title="TikTok"><svg class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-2.43.05-4.86-.36-6.95-1.45-1.94-1.02-3.46-2.62-4.42-4.51-1.02-2.01-1.51-4.24-1.51-6.49 0-3.46 1.49-6.91 4.22-9.22 2.8-2.35 6.55-3.5 10.23-2.55.02-.45.03-.9.03-1.36.01-1.43-.01-2.86.01-4.29.01-.39.04-.79.05-1.18Z" /></svg></a>
+                </div></div>
+            </div>
+            <div class="mt-8 border-t border-slate-800 pt-8 text-center text-gray-500"><p>&copy; 2024 Reion Bot. All rights reserved.</p></div>
+        </div>
+    </footer>
+    
+    <!-- Floating FAQ Button -->
+    <button id="faq-fab" class="fixed bottom-6 right-6 btn-primary w-16 h-16 rounded-full flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform z-40" title="Tanya Asisten AI">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 5.523-4.477 10-10 10S1 17.523 1 12 5.477 2 11 2s10 4.477 10 10z"></path></svg>
+    </button>
+    
+    <!-- FAQ Chat Modal -->
+    <div id="faq-chat-modal" class="faq-chat-modal hidden fixed inset-0 z-[60] flex items-center justify-center bg-black bg-opacity-70 p-4 opacity-0">
+        <div class="faq-chat-container glass-card w-full max-w-lg h-[90vh] max-h-[700px] flex flex-col rounded-2xl relative opacity-0 transform scale-95 shadow-2xl">
+            <!-- Chat Header -->
+            <div class="flex-shrink-0 p-4 bg-slate-800/50 rounded-t-2xl flex items-center justify-between">
+                <div class="flex items-center">
+                    <img src="https://files.cloudkuimages.guru/images/AoEYcbu9.jpg" alt="Reion Bot" class="w-10 h-10 rounded-full mr-3">
+                    <div>
+                        <p class="font-bold text-white">Asisten AI Reion Bot</p>
+                        <p class="text-xs text-green-400">Online</p>
+                    </div>
+                </div>
+                <button id="close-faq-button" class="text-gray-400 hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <!-- Chat Messages -->
+            <div id="faq-chat-window" class="flex-grow p-4 overflow-y-auto flex flex-col space-y-4">
+                <!-- Initial bot message will be injected here -->
+            </div>
+            <!-- Chat Input -->
+            <div class="flex-shrink-0 p-4 bg-slate-800/50 rounded-b-2xl flex items-center gap-4">
+                <input type="text" id="faq-chat-input" class="w-full bg-slate-700 border border-slate-600 text-white rounded-full p-3 px-5 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Ketik pertanyaan Anda...">
+                <button id="faq-chat-send" class="btn-primary p-3 rounded-full flex-shrink-0">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal-overlay hidden fixed inset-0 z-[70] flex items-center justify-center bg-black bg-opacity-70 p-4 opacity-0">
+        <div id="modal-content" class="modal-content glass-card w-full max-w-md max-h-[90vh] overflow-y-auto p-8 rounded-2xl relative opacity-0 transform scale-95"><button id="close-checkout-button" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button><div class="mb-6"><h2 class="text-2xl font-bold text-white mb-2">Konfirmasi Pesanan</h2><p class="text-gray-400">Selesaikan pesanan Anda untuk Paket <span id="modal-package-name" class="font-bold text-sky-400"></span>.</p></div><div class="space-y-6"><div><label for="whatsapp-number-input" class="block text-sm font-medium text-gray-300 mb-1">Nomor WhatsApp Anda</label><input type="tel" id="whatsapp-number-input" name="whatsapp-number" class="w-full bg-slate-800 border border-slate-700 text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Contoh: 081234567890"></div><div class="text-center"><button id="generate-welcome-button" class="text-sky-400 text-sm hover:text-sky-300 transition-colors">✨ Bingung dengan pesan sambutan? Biar AI yang buatkan!</button><div id="welcome-loader" class="hidden justify-center my-2"><div class="loader !w-6 !h-6"></div></div><div id="welcome-message-result" class="mt-2 text-left"></div><p id="welcome-error" class="hidden text-center text-red-400 text-sm mt-2">Maaf, terjadi kesalahan. Silakan coba lagi.</p></div><div><h3 class="text-lg font-semibold text-white mb-2">Pilih Metode Pembayaran</h3><div class="grid grid-cols-3 gap-4"><button data-method="DANA" class="payment-method border-2 border-slate-700 rounded-lg p-3 flex flex-col items-center justify-center hover:border-sky-500 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/50 transition-colors"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Logo_dana_blue.svg/1280px-Logo_dana_blue.svg.png" alt="DANA" class="h-6 object-contain"><span class="text-xs mt-2">DANA</span></button><button data-method="OVO" class="payment-method border-2 border-slate-700 rounded-lg p-3 flex flex-col items-center justify-center hover:border-sky-500 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/50 transition-colors"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Logo_ovo_purple.svg/1200px-Logo_ovo_purple.svg.png" alt="OVO" class="h-6 object-contain"><span class="text-xs mt-2">OVO</span></button><button data-method="GoPay" class="payment-method border-2 border-slate-700 rounded-lg p-3 flex flex-col items-center justify-center hover:border-sky-500 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/50 transition-colors"><img src="https://upload.wikimedia.org/wikipedia/id/thumb/d/da/Logo_gopay_baru.svg/2560px-Logo_gopay_baru.svg.png" alt="GoPay" class="h-6 object-contain"><span class="text-xs mt-2">GoPay</span></button></div></div><div class="border-t border-slate-700 pt-4"><div class="flex justify-between items-center text-gray-300"><span>Total Pembayaran:</span><span id="modal-package-price" class="text-2xl font-bold text-sky-400"></span></div></div><button id="confirm-payment-button" class="w-full btn-primary py-3 rounded-lg font-bold text-lg">Lanjutkan ke Pembayaran</button></div></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // --- API KEY CONFIGURATION ---
+        const GEMINI_API_KEY = ""; 
+
+        // Initialize Animate On Scroll
+        AOS.init({ duration: 800, once: true });
+
+        // --- General UI Logic ---
+        const navbar = document.getElementById('navbar');
+        window.onscroll = () => {
+            if (window.scrollY > 50) navbar.classList.add('bg-slate-900/80', 'backdrop-blur-sm', 'shadow-lg');
+            else navbar.classList.remove('bg-slate-900/80', 'backdrop-blur-sm', 'shadow-lg');
+        };
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        mobileLinks.forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+        // --- Live Stats Counter & Chart ---
+        const statsCounter = document.getElementById('stats-counter');
+        const chartCanvas = document.getElementById('live-chart');
+        let currentCount = 1324567;
+        const chartData = {
+            labels: Array(15).fill(''),
+            datasets: [{
+                data: Array(15).fill(null).map(() => Math.random() * 50 + 20),
+                borderColor: '#0EA5E9', tension: 0.4, borderWidth: 2, pointRadius: 0, fill: true,
+                backgroundColor: 'rgba(14, 165, 233, 0.1)',
+            }]
+        };
+        const liveChart = new Chart(chartCanvas, {
+            type: 'line', data: chartData,
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: { x: { display: false }, y: { display: false } },
+                plugins: { legend: { display: false }, tooltip: { enabled: false } },
+                animation: { duration: 500 }
+            }
+        });
+        
+        setInterval(() => {
+            if (Math.random() < 0.7) {
+                currentCount += Math.floor(Math.random() * 5) + 1;
+                statsCounter.textContent = currentCount.toLocaleString('id-ID');
+            }
+            chartData.datasets[0].data.shift();
+            chartData.datasets[0].data.push(Math.random() * 50 + 20);
+            liveChart.update();
+        }, 1500);
+
+        // --- Checkout Modal Logic ---
+        const checkoutModal = document.getElementById('checkout-modal'), modalContent = document.getElementById('modal-content'), closeCheckoutButton = document.getElementById('close-checkout-button'), checkoutButtons = document.querySelectorAll('.checkout-button'), modalPackageName = document.getElementById('modal-package-name'), modalPackagePrice = document.getElementById('modal-package-price'), confirmPaymentButton = document.getElementById('confirm-payment-button'), whatsappNumberInput = document.getElementById('whatsapp-number-input');
+        let currentPackageName = '', currentPackagePrice = 0, selectedPaymentMethod = '';
+        
+        const openModal = (pkgName, pkgPrice) => {
+            const fPrice = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(pkgPrice);
+            currentPackageName = pkgName; currentPackagePrice = fPrice;
+            modalPackageName.textContent = currentPackageName;
+            modalPackagePrice.textContent = fPrice;
+            document.body.classList.add('body-no-scroll');
+            checkoutModal.classList.remove('hidden');
+            setTimeout(() => { checkoutModal.classList.remove('opacity-0'); modalContent.classList.remove('opacity-0', 'scale-95'); }, 10);
+        };
+        const closeModal = () => {
+            modalContent.classList.add('opacity-0', 'scale-95');
+            checkoutModal.classList.add('opacity-0');
+            setTimeout(() => {
+                checkoutModal.classList.add('hidden');
+                if(!document.querySelector('.faq-chat-modal:not(.hidden)')) { document.body.classList.remove('body-no-scroll'); }
+                document.getElementById('welcome-message-result').innerHTML = '';
+                document.getElementById('welcome-error').classList.add('hidden');
+            }, 300);
+        };
+        checkoutButtons.forEach(btn => btn.addEventListener('click', () => { const card = btn.closest('[data-package-name]'); openModal(card.dataset.packageName, card.dataset.packagePrice); }));
+        closeCheckoutButton.addEventListener('click', closeModal);
+        checkoutModal.addEventListener('click', e => { if (e.target === checkoutModal) closeModal(); });
+        
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        paymentMethods.forEach(method => method.addEventListener('click', () => { 
+            paymentMethods.forEach(m => m.classList.remove('border-sky-500')); 
+            method.classList.add('border-sky-500');
+            selectedPaymentMethod = method.dataset.method;
+        }));
+
+        confirmPaymentButton.addEventListener('click', () => {
+            const userWhatsApp = whatsappNumberInput.value.trim();
+            if (!userWhatsApp) { whatsappNumberInput.classList.add('input-error'); setTimeout(() => whatsappNumberInput.classList.remove('input-error'), 500); return; }
+            if (!selectedPaymentMethod) { alert('Silakan pilih metode pembayaran terlebih dahulu.'); return; }
+            const myWhatsApp = '6285876125581'; // Ganti dengan nomor WA Anda
+            const message = `Halo Reion Bot,\n\nSaya ingin mengonfirmasi pesanan untuk layanan Anda.\n\nBerikut detailnya:\n-----------------------------------\n📦 *Paket:* ${currentPackageName}\n📱 *Nomor WhatsApp Bot:* ${userWhatsApp}\n💳 *Metode Pembayaran Pilihan:* ${selectedPaymentMethod}\n💰 *Total:* ${currentPackagePrice}\n-----------------------------------\n\nMohon kirimkan instruksi selanjutnya untuk pembayaran. Terima kasih!`;
+            const whatsappUrl = `https://wa.me/${myWhatsApp}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+        
+        // --- Gemini API Integration ---
+        async function callGemini(prompt) {
+             if (!GEMINI_API_KEY) { throw new Error("API_KEY_MISSING"); }
+             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
+             const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+             const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+             const result = await response.json();
+             if (result.candidates && result.candidates[0]?.content?.parts[0]?.text) return result.candidates[0].content.parts[0].text;
+             console.error("Unexpected API response:", result);
+             if (result.candidates && result.candidates[0].finishReason === 'SAFETY') return "Konten yang diminta tidak dapat dibuat karena alasan keamanan.";
+             throw new Error("Invalid response from Gemini API.");
+        }
+
+        const knowledgeBase = `Anda adalah asisten AI untuk Reion Bot, layanan sewa bot WhatsApp. Tujuan utama Anda adalah membantu pengguna dengan ramah, cerdas, dan profesional.
+        Gunakan informasi berikut sebagai sumber kebenaran utama:
+        - Nama Produk: Reion Bot
+        - Fitur Utama: Balasan otomatis, manajemen grup (kick/add, anti-link), pesan terjadwal, downloader media sosial, dan integrasi API.
+        - Harga Paket:
+          - Personal: Rp 25.000 per bulan.
+          - Bisnis: Rp 50.000 per bulan, mencakup semua fitur personal ditambah fitur canggih untuk bisnis.
+        - Masa Aktif: Semua paket berlangganan berlaku selama 30 hari.
+        - Cara Order: Klik tombol 'Pilih Paket', isi nomor WhatsApp, pilih metode pembayaran, dan lanjutkan pembayaran via chat WhatsApp yang akan terbuka.
+        - Metode Pembayaran: Menerima DANA, OVO, dan GoPay.
+        
+        ATURAN PENTING:
+        1. Selalu jawab dalam Bahasa Indonesia.
+        2. Gunakan informasi di atas sebagai prioritas. Anda boleh membuat kesimpulan logis dari informasi tersebut (misal: jika ditanya "berapa lama paketnya?", jawab "Semua paket berlaku selama 30 hari.").
+        3. Jika pertanyaan SAMA SEKALI di luar topik Reion Bot (misalnya soal resep, politik, atau kode pemrograman), tolak dengan sopan dengan jawaban: "Maaf, saya adalah asisten khusus Reion Bot dan hanya bisa menjawab pertanyaan seputar layanan kami. Ada lagi yang bisa saya bantu terkait Reion Bot?"
+        4. Jaga jawaban tetap ramah dan membantu.`;
+        
+        // --- Floating FAQ Chat Logic ---
+        const faqFab = document.getElementById('faq-fab'), faqChatModal = document.getElementById('faq-chat-modal'), closeFaqButton = document.getElementById('close-faq-button'), faqChatWindow = document.getElementById('faq-chat-window'), faqChatInput = document.getElementById('faq-chat-input'), faqChatSend = document.getElementById('faq-chat-send');
+        
+        const openFaqModal = () => {
+            document.body.classList.add('body-no-scroll');
+            faqChatModal.classList.remove('hidden');
+            setTimeout(() => { faqChatModal.classList.remove('opacity-0'); faqChatModal.querySelector('.faq-chat-container').classList.remove('opacity-0', 'scale-95'); }, 10);
+            if(faqChatWindow.children.length === 0) addMessageToFaqChat('Halo! Ada yang bisa saya bantu seputar Reion Bot? 😊', 'bot');
+        };
+        const closeFaqModal = () => {
+            faqChatModal.querySelector('.faq-chat-container').classList.add('opacity-0', 'scale-95');
+            faqChatModal.classList.add('opacity-0');
+            setTimeout(() => { faqChatModal.classList.add('hidden'); if(!document.querySelector('.modal-overlay:not(.hidden)')) { document.body.classList.remove('body-no-scroll'); } }, 300);
+        };
+        faqFab.addEventListener('click', openFaqModal);
+        closeFaqButton.addEventListener('click', closeFaqModal);
+
+        function addMessageToFaqChat(message, sender) {
+            const bubble = document.createElement('div');
+            bubble.className = `max-w-[80%] rounded-2xl p-3 text-sm shadow ${sender === 'user' ? 'faq-chat-bubble-user' : 'faq-chat-bubble-bot'}`;
+            bubble.textContent = message;
+            faqChatWindow.appendChild(bubble);
+            faqChatWindow.scrollTop = faqChatWindow.scrollHeight;
+        }
+
+        async function handleFaqSend() {
+            const question = faqChatInput.value.trim();
+            if (!question) return;
+            addMessageToFaqChat(question, 'user');
+            faqChatInput.value = ''; faqChatSend.disabled = true;
+
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'faq-chat-bubble-bot';
+            typingIndicator.innerHTML = '<div class="flex items-center space-x-1"><div class="h-2 w-2 bg-slate-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div><div class="h-2 w-2 bg-slate-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div><div class="h-2 w-2 bg-slate-500 rounded-full animate-bounce"></div></div>';
+            faqChatWindow.appendChild(typingIndicator);
+            faqChatWindow.scrollTop = faqChatWindow.scrollHeight;
+
+            try {
+                const prompt = `${knowledgeBase}\n\nPertanyaan Pengguna: "${question}"\n\nJawaban Anda:`;
+                const botResponse = await callGemini(prompt);
+                faqChatWindow.removeChild(typingIndicator);
+                addMessageToFaqChat(botResponse, 'bot');
+            } catch (e) {
+                faqChatWindow.removeChild(typingIndicator);
+                if (e.message === "API_KEY_MISSING") {
+                    addMessageToFaqChat('Fitur AI ini belum diaktifkan oleh pemilik website. Mohon maaf atas ketidaknyamanannya.', 'bot');
+                } else {
+                    addMessageToFaqChat('Maaf, ada gangguan pada koneksi ke AI. Silakan coba lagi beberapa saat.', 'bot');
+                }
+                console.error("FAQ Error:", e);
+            } finally {
+                faqChatSend.disabled = false;
+            }
+        }
+        faqChatSend.addEventListener('click', handleFaqSend);
+        faqChatInput.addEventListener('keypress', e => { if (e.key === 'Enter') handleFaqSend(); });
+        
+        // --- Welcome Message Generator Logic ---
+        const generateWelcomeButton = document.getElementById('generate-welcome-button'), welcomeLoader = document.getElementById('welcome-loader'), welcomeMessageResult = document.getElementById('welcome-message-result'), welcomeError = document.getElementById('welcome-error');
+        generateWelcomeButton.addEventListener('click', async () => { /* ... (code unchanged) ... */ });
+
+        // --- Smart Testimonial Logic ---
+        const testimonialButton = document.getElementById('testimonial-button'), testimonialInput = document.getElementById('testimonial-input'), testimonialLoader = document.getElementById('testimonial-loader'), testimonialResult = document.getElementById('testimonial-result'), testimonialError = document.getElementById('testimonial-error');
+        testimonialButton.addEventListener('click', async () => {
+            if (!GEMINI_API_KEY) {
+                testimonialResult.innerHTML = `<div class="glass-card p-8"><p class="text-red-400 text-center">Fitur Testimoni belum diaktifkan.</p></div>`;
+                return;
+            }
+            const businessField = testimonialInput.value.trim();
+            if (!businessField) return;
+            testimonialLoader.style.display = 'flex'; testimonialError.classList.add('hidden'); testimonialButton.disabled = true;
+            const prompt = `Buat testimoni singkat (2 kalimat) positif untuk "Reion Bot" dari pengguna fiktif di bidang "${businessField}". Sebutkan satu keuntungan spesifik. Akhiri dengan nama fiktif dan jenis usahanya. Contoh: "Semenjak pakai Reion Bot, semua pesanan jadi terdata rapi. Admin sangat terbantu! - Budi, Owner Budi Katering".`;
+            try {
+                const resultText = await callGemini(prompt);
+                const [quote, author] = resultText.split(' - ');
+                const [name, job] = author.split(', ');
+                testimonialResult.innerHTML = `<div class="glass-card p-8"><p class="text-gray-300 mb-4">"${quote}"</p><div class="flex items-center"><img src="https://i.pravatar.cc/40?u=${name.replace(/\s/g, '')}" alt="${name}" class="w-10 h-10 rounded-full mr-4"><div><p class="font-bold text-white">${name}</p><p class="text-sm text-gray-400">${job}</p></div></div></div>`;
+            } catch (e) {
+                console.error("Testimonial Error:", e);
+                testimonialError.classList.remove('hidden');
+            } finally {
+                testimonialLoader.style.display = 'none';
+                testimonialButton.disabled = false;
+            }
+        });
+
+        function copyToClipboard(button) { /* ... (code unchanged) ... */ }
+    </script>
+</body>
+</html>
